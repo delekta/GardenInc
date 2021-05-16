@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
-import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
+import { AddItemComponent } from './components/add-item/add-item.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { ItemsListComponent } from './components/items-list/items-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    AddTutorialComponent,
-    TutorialDetailsComponent,
-    TutorialsListComponent
+    AddItemComponent,
+    ItemDetailsComponent,
+    ItemsListComponent
   ],
   imports: [
     BrowserModule,
