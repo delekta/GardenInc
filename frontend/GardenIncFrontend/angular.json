@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GardenIncFrontend"
+    }
+  },
+  "defaultProject": "GardenIncFrontend",
+  "cli": {
+    "analytics": false
+  }
 }
