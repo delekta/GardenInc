@@ -33,6 +33,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
+  console.log("sooomething");
     const name = req.query.name;
     var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
   
