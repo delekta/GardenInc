@@ -33,18 +33,18 @@ Wszystkie powyższe elementy są zamknięte w osobnych dockerowych kontenerach, 
 
 # Struktura bazy danych MongoDB
 Baza danych składa się z 8 kolekcji:
- - [] **[customer](###customer)** - zawiera informacje dotyczące klientów,
- - [] **[order](###order)** - agreguje wszelkie zamówienia,
- - [] **[returned](###returned)** - agreguje zwroty zakupów,
- - [] **[delivery](###delivery)** - przechowuje informacje na temat dostaw zamówień,
+ - [ ] **[customer](###customer)** - zawiera informacje dotyczące klientów,
+ - [ ] **[order](###order)** - agreguje wszelkie zamówienia,
+ - [ ] **[returned](###returned)** - agreguje zwroty zakupów,
+ - [ ] **[delivery](###delivery)** - przechowuje informacje na temat dostaw zamówień,
  - [x] **[item](###item)** - przechowuje wszystkie produkty oferowane w sklepie,
- - [] **[category](###category)** - zbiera wszystkie kateogorie razem z możliwymi filtrami i podkategoriami,
- - [] **[employee](###employee)** - zawiera informacje oo wszystkich pracownikach,
- - [] **[supplier](###supplier)** - przechowuje dane dostawców, wraz z dostawami,
+ - [ ] **[category](###category)** - zbiera wszystkie kateogorie razem z możliwymi filtrami i podkategoriami,
+ - [ ] **[employee](###employee)** - zawiera informacje oo wszystkich pracownikach,
+ - [ ] **[supplier](###supplier)** - przechowuje dane dostawców, wraz z dostawami,
 
 Przykładowe struktury poszczególnych dokumentów:
 ### **customer:**
-```json
+```js
 {
   "_id":"hashedUserId",
   "name":"User354",
@@ -70,7 +70,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **order**
-```json
+```yaml
 {
   "_id":"hashedOrderId",
   "ordered":[
@@ -87,7 +87,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **returned**
-```json
+```Perl
 {
   "_id":"hashedReturnId",
   "order_id":"hashedOrderId",
@@ -105,7 +105,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **delivery**
-```json
+```python
 {
   "_id":"hashedDeliveryId",
   "supplier_id":"hashedSupplierId",
@@ -123,7 +123,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **item**
-```json
+```elixir
 {
   "_id":"hashedItemId",
   "name":"itemName",
@@ -268,10 +268,10 @@ W celu otrzymania danych z serwera bazodanowego należy kierować odpowiednie re
 # Postępy prac
 | Zadanie                               | Wykonano          | Kto                   |
 |:-------------:                        |:-------------:    |:-----:                |
-| Stworzyć plan bazy danych             |[x]                | Michał, Kamil,Paulina |
-| Dokonać podziału prac                 |[x]                | Michał, Kamil,Paulina |
-| zbudować serwer                       |[x]                | Kamil                 |
-| postawić aplikację angularową         |[x]                | Kamil                 |
-| utworzyć kontenery Docker             |[x]                | Michał                |
-| połączyć aplikację przez Dockera      |[x]                | Michał                |
-| Utworzyć dokumentację                 |[x]                | Michał                |
+| Stworzyć plan bazy danych             |✅                 | Michał, Kamil,Paulina |
+| Dokonać podziału prac                 |✅                 | Michał, Kamil,Paulina |
+| zbudować serwer                       |✅                 | Kamil                 |
+| postawić aplikację angularową         |✅                 | Kamil                 |
+| utworzyć kontenery Docker             |✅                 | Michał                |
+| połączyć aplikację przez Dockera      |✅                 | Michał                |
+| Utworzyć dokumentację                 |✅                 | Michał                |
