@@ -30,7 +30,7 @@
           {{ item.name }}
         </li>
       </ul>
-  
+
       <button class="m-3 btn btn-sm btn-danger" (click)="removeAllItems()">
         Remove All
       </button>
@@ -49,12 +49,12 @@
           <label><strong>Categories:</strong></label>
           {{ currentItem.categories}}
         </div>
-  
+
         <a class="badge badge-warning" routerLink="/items/{{ currentItem.id }}">
           Edit
         </a>
       </div>
-  
+
       <div *ngIf="!currentItem">
         <br />
         <p>Please click on a Item...</p>

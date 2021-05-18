@@ -6,14 +6,25 @@ services:
     build:
       context: backend
       dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
     ports:
       - 3000:3000
     volumes:
       - ./backend:/usr/src/app
     links:
       - mongodb
+
+  gardenincfrontend:
+    image: gardenincfrontend
+    build:
+      context: ./frontend/GardenInc
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend/GardenInc:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - gardenincbackend
 
   mongodb:
     image: mongo:latest

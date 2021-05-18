@@ -3,6 +3,7 @@ const Item = db.items;
 
 // Create and Save a newItem
 exports.create = (req, res) => {
+  console.log("duupa");
     // Validate request
     if (!req.body.name) {
       res.status(400).send({ message: "Content can not be empty!" });
