@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 
 app.use(cors(corsOptions));
@@ -31,11 +31,11 @@ db.mongoose
   });
 
 // simple route
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to GardenInc application." });
-// });
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to GardenInc application." });
+});
 
-require("./app/routes/tutorial.routes.js");
+require("./app/routes/tutorial.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
