@@ -31,4 +31,26 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongoData:/data/db
+      - db:/data/db
+
+  backup:
+    build:
+      context: backup
+      dockerfile: Dockerfile
+    volumes:
+      - ./tmp/backup:/backup
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    environment:
+      MONGO_HOST: 'mongodb'
+      MONGO_PORT: 27017
+      CRON_TIME: '* * * * *'
+      INIT_BACKUP: 1
+      MAX_BACKUPS: 2
+      INIT_RESTORE_LATEST: 1
+
+volumes:
+  db:
+    driver: local

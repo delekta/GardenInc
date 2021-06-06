@@ -3,7 +3,6 @@ const Item = db.items;
 
 // Create and Save a newItem
 exports.create = (req, res) => {
-  console.log("duupa");
     // Validate request
     if (!req.body.name) {
       res.status(400).send({ message: "Content can not be empty!" });
@@ -34,7 +33,6 @@ exports.create = (req, res) => {
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
-  console.log("sooomething");
     const name = req.query.name;
     var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
   
