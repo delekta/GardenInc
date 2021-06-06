@@ -67,17 +67,17 @@ exports.findOne = (req, res) => {
       });
   };
 
-// Update a Tutorial by the id in the request
+// Update a Item by the id in the request
 exports.update = (req, res) => {
     if (!req.body) {
       return res.status(400).send({
         message: "Data to update can not be empty!"
       });
     }
-  
+
     const id = req.params.id;
-  
-    Tutorial.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+
+    Item.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
       .then(data => {
         if (!data) {
           res.status(404).send({
