@@ -15,19 +15,19 @@ export class ItemService {
     return this.http.get(baseUrl);
   }
 
-  get(id): Observable<any> {
+  get(id: any): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  create(data): Observable<any> {
+  create(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
   }
 
-  update(id, data): Observable<any> {
+  update(id: any, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
 
-  delete(id): Observable<any> {
+  delete(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class ItemService {
     return this.http.delete(baseUrl);
   }
 
-  findByName(name): Observable<any> {
+  findByName(name: any): Observable<any> {
     return this.http.get(`${baseUrl}?name=${name}`);
   }
 }
