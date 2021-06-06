@@ -36,16 +36,6 @@ exports.create = (req, res) => {
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
-  // var dupa  =  new Employee({
-  //   firstname : "Michał",
-  //   lastname : "Faci",
-  //   supervised_categories: ["Kwiaty"],
-  //   "auth.login": "test",
-  //   "auth.password": "test123",
-  //   position: 1
-  // })
-
-  // dupa.save(dupa);
 
   console.log("sooomething");
     const name = req.query.name;
@@ -81,30 +71,7 @@ exports.findOne = (req, res) => {
       });
   };
 
-// Update a Tutorial by the id in the request
-// exports.update = (req, res) => {
-//     if (!req.body) {
-//       return res.status(400).send({
-//         message: "Data to update can not be empty!"
-//       });
-//     }
-  
-//     const id = req.params.id;
-  
-//     Tutorial.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-//       .then(data => {
-//         if (!data) {
-//           res.status(404).send({
-//             message: `Cannot update Item with id=${id}. Maybe Item was not found!`
-//           });
-//         } else res.send({ message: "Item was updated successfully." });
-//       })
-//       .catch(err => {
-//         res.status(500).send({
-//           message: "Error updating Item with id=" + id
-//         });
-//       });
-//   };
+
 
 // Delete a Item with the specified id in the request
 exports.delete = (req, res) => {
