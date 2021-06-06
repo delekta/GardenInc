@@ -33,18 +33,18 @@ Wszystkie powyższe elementy są zamknięte w osobnych dockerowych kontenerach, 
 
 # Struktura bazy danych MongoDB
 Baza danych składa się z 8 kolekcji:
- - [ ] **[customer](###customer)** - zawiera informacje dotyczące klientów,
- - [ ] **[order](###order)** - agreguje wszelkie zamówienia,
- - [ ] **[returned](###returned)** - agreguje zwroty zakupów,
- - [ ] **[delivery](###delivery)** - przechowuje informacje na temat dostaw zamówień,
+ - [x] **[customer](###customer)** - zawiera informacje dotyczące klientów,
+ - [x] **[order](###order)** - agreguje wszelkie zamówienia,
+ - [x] **[returned](###returned)** - agreguje zwroty zakupów,
+ - [x] **[delivery](###delivery)** - przechowuje informacje na temat dostaw zamówień,
  - [x] **[item](###item)** - przechowuje wszystkie produkty oferowane w sklepie,
- - [ ] **[category](###category)** - zbiera wszystkie kateogorie razem z możliwymi filtrami i podkategoriami,
- - [ ] **[employee](###employee)** - zawiera informacje oo wszystkich pracownikach,
- - [ ] **[supplier](###supplier)** - przechowuje dane dostawców, wraz z dostawami,
+ - [x] **[category](###category)** - zbiera wszystkie kateogorie razem z możliwymi filtrami i podkategoriami,
+ - [x] **[employee](###employee)** - zawiera informacje oo wszystkich pracownikach,
+ - [x] **[supplier](###supplier)** - przechowuje dane dostawców, wraz z dostawami,
 
 Przykładowe struktury poszczególnych dokumentów:
 ### **customer:**
-```js
+```json
 {
   "_id":"hashedUserId",
   "name":"User354",
@@ -70,7 +70,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **order**
-```yaml
+```json
 {
   "_id":"hashedOrderId",
   "ordered":[
@@ -87,7 +87,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **returned**
-```Perl
+```json
 {
   "_id":"hashedReturnId",
   "order_id":"hashedOrderId",
@@ -105,7 +105,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **delivery**
-```python
+```json
 {
   "_id":"hashedDeliveryId",
   "supplier_id":"hashedSupplierId",
@@ -123,7 +123,7 @@ Przykładowe struktury poszczególnych dokumentów:
 }
 ```
 ### **item**
-```elixir
+```json
 {
   "_id":"hashedItemId",
   "name":"itemName",

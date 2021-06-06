@@ -16,6 +16,9 @@ module.exports = app => {
       'suppliers':require("../controllers/supplier.controller.js"),
     };
 
+    // Authentication
+    router.post("/auth",controllers['customers'].auth);
+
     // Retrieve all Items
     //router.get("/", items.findAll);
     router.get("/:coll", function(req,res) {
@@ -53,6 +56,8 @@ module.exports = app => {
     router.delete("/:coll", function(req,res) {
       return controllers[req.params.coll].deleteAll(req,res);
     });
+
+    
 
     app.use('/api', router);
   };

@@ -8,14 +8,14 @@ exports.create = (req, res) => {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-  
+
     // Create a Customer
     const customer = new Customer({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password
     });
-  
+
     // Save Customer in the database
     customer
       .save(customer)
@@ -29,7 +29,7 @@ exports.create = (req, res) => {
         });
       });
   };
-  
+
 
 // Retrieve all Customers from the database, 
 exports.findAll = (req, res) => {
@@ -127,16 +127,21 @@ exports.deleteAll = (req, res) => {
       });
   };
 
-// Find all published Customers
-exports.findAllPublished = (req, res) => {
-    Customer.find({ published: true })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving Customers."
-        });
+
+exports.auth = (req,res)=>{
+  Customer.find({email:req.body.email,password:req.body.password})
+    .then(data=>{
+      if(data.length==0){
+        res.send({auth:false});
+      }else{
+        res.send({auth:true});
+      }
+    })
+    .catch(err=>{
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred during authentication"
       });
-  };
+    });
+
+};
