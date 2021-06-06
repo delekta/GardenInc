@@ -1,0 +1,18 @@
+
+.item-card
+{
+    width: 200px;
+    height: 250px;
+    margin: 10px 10px;
+    background-color: rgb(229, 255, 208);
+    border-radius: 5px;
+    box-shadow: rgb(207, 207, 207) 3px 2px 1px;
+    margin-top: 5px;
+    float: left;
+}
+
+p
+{
+    font-size: 20px;
+    font-family: 'Abel', sans-serif;
+}

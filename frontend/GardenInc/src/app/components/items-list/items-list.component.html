@@ -1,63 +1,11 @@
-<div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by name"
-          [(ngModel)]="name"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="searchName()"
-          >
-            Search
-          </button>
-        </div>
-      </div>
+<div id=container-main>
+    <p>Kategoria: Wszyskie</p>
+    <h2 id="caption">Lista produktów</h2><br>
+    <div id=container-list>
+        <app-item-card *ngFor = "let item of items; let i = index" [specificItem]="item"></app-item-card>
     </div>
-    <div class="col-md-6">
-      <h4>Items List</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let item of items; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveItem(item, i)"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
+</div>
 
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllItems()">
-        Remove All
-      </button>
-    </div>
-    <div class="col-md-6">
-      <div *ngIf="currentItem">
-        <h4>Item</h4>
-        <div>
-          <label><strong>Name:</strong></label> {{ currentItem.name }}
-        </div>
-        <div>
-          <label><strong>Price:</strong></label>
-          {{ currentItem.price }}
-        </div>
-        <div>
-          <label><strong>Categories:</strong></label>
-          {{ currentItem.categories}}
-        </div>
 
-        <a class="badge badge-warning" routerLink="/items/{{ currentItem.id }}">
-          Edit
-        </a>
-      </div>
 
-      <div *ngIf="!currentItem">
-        <br />
-        <p>Please click on a Item...</p>
-      </div>
-    </div>
-  </div>
+

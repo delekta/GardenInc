@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ItemsListComponent } from './components/items-list/items-list.component';
-import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './components/add-item/add-item.component';
+import { ContainerListComponent } from './components/container-list/container-list.component';
+import { EmployeesListComponent } from './components/employees-list/employees-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainSiteComponent } from './components/main-site/main-site.component';
+import { RejestrationComponent } from './components/rejestration/rejestration.component';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'items', pathMatch: 'full' },
-  { path: 'items', component: ItemsListComponent },
-  { path: 'items/:id', component: ItemDetailsComponent },
-  { path: 'add', component: AddItemComponent }
+  {path: '', redirectTo:'main', pathMatch: 'full'},
+  {path: 'items-list', component: ContainerListComponent},
+  {path: 'add-item', component:AddItemComponent},
+  {path: 'employees-list', component: EmployeesListComponent},
+  {path: 'main', component: MainSiteComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'rejestration', component: RejestrationComponent}
 ];
 
 @NgModule({

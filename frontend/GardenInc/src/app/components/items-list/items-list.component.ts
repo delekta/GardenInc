@@ -24,7 +24,7 @@ export class ItemsListComponent implements OnInit {
       .subscribe(
         data => {
           this.items = data;
-          console.log(data);
+          console.log(this.items);
         },
         error => {
           console.log(error);
@@ -37,7 +37,7 @@ export class ItemsListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveItem(item, index): void {
+  setActiveItem(item: any, index: number): void {
     this.currentItem = item;
     this.currentIndex = index;
   }
@@ -66,3 +66,4 @@ export class ItemsListComponent implements OnInit {
         });
   }
 }
+

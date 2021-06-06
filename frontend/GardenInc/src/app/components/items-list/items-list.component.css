@@ -1,0 +1,12 @@
+#container-list
+{
+    margin:auto;
+    width: 70vw;
+}
+
+#container-main
+{
+    padding-top: 50px;
+    margin: 10px 50px;
+    clear: both;
+}

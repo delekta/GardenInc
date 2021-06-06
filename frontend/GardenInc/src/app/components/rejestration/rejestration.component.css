@@ -1,0 +1,83 @@
+h2
+{
+    clear: both;
+    position: relative;
+    text-align: center;
+    top:100px;
+    font-family: 'Abel', sans-serif;
+}
+
+#rejestration-container
+{
+    width: 400px;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: gray 2px 1px 5px;
+    top: 100px;
+    clear: both;
+    margin: auto;
+    position: relative;
+}
+
+.form-group
+{
+    margin: 10px 5px;
+    padding: 5px;
+}
+
+label
+{
+    width: 100px;
+    margin-right: 20px;
+    font-size: 20px;
+    font-family: 'Abel', sans-serif;
+}
+
+input
+{
+    float: right;
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+    border: grey 1px solid;
+}
+
+button
+{
+    margin: 20px 38%;
+    font-family: 'Abel', sans-serif;
+    height: 30px;
+    border-radius: 5px;
+    font-weight: bolder;
+    box-shadow: rgb(162, 167, 155) 2px 1px 4px;
+    width: 100px;
+
+    background-color: rgb(11, 131, 31);
+    border: none;
+}
+
+/* #main-container
+{
+    width: 100vw;
+    height: 95vh;
+     background-color: greenyellow; 
+} */
+
+img
+{
+    /* width: 100vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0; */
+
+    width: 100%;
+    left: 0;
+    top: 100px;
+    object-fit: cover;
+    height: 84vh;
+    display: inline-block;
+    position: absolute;
+    z-index: inherit -50;
+}

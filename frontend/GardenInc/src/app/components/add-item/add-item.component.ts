@@ -7,11 +7,13 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
+
   item = {
     name: '',
     price: 0,
-    categories: []
+    categories: Array()
   };
+
   submitted = false;
 
   constructor(private itemService: ItemService) { }

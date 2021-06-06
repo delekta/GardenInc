@@ -3,14 +3,15 @@ module.exports = mongoose => {
       "employee",
       mongoose.Schema(
         {
-            firstname: String,
-            lastname:String,
-            position:String,
-            supervised_category:[String],
-            auth:{
-                login: String,
-                password: String
-            }
+         firstname: String,
+         lastname: String,
+         position: String,
+         supervised_categories: [String],
+         auth: {
+             login: String,
+             password: String
+         } 
+
         },
         { timestamps: true }
       )
