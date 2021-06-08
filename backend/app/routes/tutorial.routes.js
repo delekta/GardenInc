@@ -16,43 +16,38 @@ module.exports = app => {
       'suppliers':require("../controllers/supplier.controller.js"),
     };
 
-    // Authentication
     router.post("/auth",controllers['customers'].auth);
 
-    // Retrieve all Items
-    //router.get("/", items.findAll);
+    router.post("/customer/cart", function(req, res){
+      if(req.body.add){
+        controllers.customers.add_to_cart(req, res);
+      }else{
+        controllers.customers.remove_from_cart(req, res);
+      }
+    });
+
     router.get("/:coll", function(req,res) {
       console.log(req.params.coll);
       return controllers[req.params.coll].findAll(req,res);
     });
 
-    // Create a new Item
-    // router.post("/", items.create);
     router.post("/:coll", function(req,res) {
       console.log(controllers[req.params.coll]);
       return controllers[req.params.coll].create(req,res);
     });
 
-    // Retrieve a single Item with id
-    //router.get("/:id", items.findOne);
     router.get("/:coll/:id", function(req,res) {
       return controllers[req.params.coll].findOne(req,res);
     });
 
-    // Update a Item with id
-    // router.put("/:id", items.update);
     router.get("/:coll/:id", function(req,res) {
       return controllers[req.params.coll].update(req,res);
     });
 
-    // Delete a Item with id
-    // router.delete("/:id", items.delete);
     router.delete("/:coll/:id", function(req,res) {
       return controllers[req.params.coll].delete(req,res);
     });
 
-    // Delete all items
-    // router.delete("/", items.deleteAll);
     router.delete("/:coll", function(req,res) {
       return controllers[req.params.coll].deleteAll(req,res);
     });

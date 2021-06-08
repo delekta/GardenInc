@@ -9,11 +9,9 @@ exports.create = (req, res) => {
       return;
     }
 
-    // Create an employee
     const order = new Order({
       ordered : req.body.ordered,
-      delivered : req.body.delivered,
-      order_date : req.body.order_date
+      order_date : new Date()
     });
 
     // Save Order in the database
@@ -34,7 +32,6 @@ exports.create = (req, res) => {
 // Retrieve all Orders from the database.
 exports.findAll = (req, res) => {
 
-  console.log("sooomething");
     const name = req.query.name;
     var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
   

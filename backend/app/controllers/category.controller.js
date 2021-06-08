@@ -9,33 +9,34 @@ exports.create = (req, res) => {
       return;
     }
 
-    const category = new Category({
-      name: req.body.name,
-      sub_categories: req.body.sub_categories,
-      parent_id: req.body.parent_id
-    });
-  
-    // Save Item in the database
-    category
-      .save(category)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Category."
-        });
-      });
+
   };
-  
+
+exports.add_new_category = (cat,sub_cat,parent)=>{
+  const category = new Category({
+    name: cat,
+    sub_categories: sub_cat,
+    parent_id: parent
+  });
+
+  // Save Item in the database
+  category
+    .save(category)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Category."
+      });
+    });
+}
+
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
-  
-    Item.find(condition)
+    Category.find()
       .then(data => {
         res.send(data);
       })
@@ -114,7 +115,7 @@ exports.delete = (req, res) => {
 
 // Delete all Items from the database.
 exports.deleteAll = (req, res) => {
-    Item.deleteMany({})
+    Category.deleteMany({})
       .then(data => {
         res.send({
           message: `${data.deletedCount} Items were deleted successfully!`
@@ -128,16 +129,3 @@ exports.deleteAll = (req, res) => {
       });
   };
 
-// Find all published Items
-exports.findAllPublished = (req, res) => {
-    Item.find({ published: true })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving items."
-        });
-      });
-  };

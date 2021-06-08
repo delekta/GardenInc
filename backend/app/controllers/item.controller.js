@@ -1,5 +1,6 @@
 const db = require("../models");
 const Item = db.items;
+const category_controller = require("../controllers/category.controller");
 
 // Create and Save a newItem
 exports.create = (req, res) => {
@@ -28,8 +29,23 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the Item."
         });
       });
+
+    for (category of item.categories){
+      console.log(category);
+      db.categories.find({name:category})
+      .then(data=>{
+        if(data.length==0)
+          category_controller.add_new_category(category,[],null);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while adding category for item."
+        });
+      });
+    }
   };
-  
+
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
@@ -142,3 +158,4 @@ exports.findAllPublished = (req, res) => {
         });
       });
   };
+

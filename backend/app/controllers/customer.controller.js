@@ -1,5 +1,6 @@
-const db = require("../models");
-const Customer = db.customers;
+const Db = require("../models");
+const Customer = Db.customers;
+const oreders = require("../controllers/order.controller");
 
 // Create and Save a newCustomer
 exports.create = (req, res) => {
@@ -143,5 +144,93 @@ exports.auth = (req,res)=>{
           err.message || "Some error occurred during authentication"
       });
     });
-
 };
+
+exports.add_to_cart = async (req, res) => {
+  try{
+    let cust = await Customer.findOne({_id:req.body.customer_id});
+    
+    for (item of req.body.items){
+      let changed = false;
+      for(cart_item of cust.cart.items){
+        if(item.item_id==cart_item.item_id){
+          cart_item.amount = item.amount;
+          changed = true;
+          break;
+        }
+      }
+      if(!changed){
+        const temp = {"item_id":item.item_id,"amount":item.amount};
+        cust.cart.items.push(temp);
+      }
+    }
+
+    // console.log(Date());
+    // cust.cart.modification_date = Date();
+
+    const updated_cust = await Customer.findByIdAndUpdate(cust._id,cust,{useFindAndModify: false});
+    res.send(updated_cust);
+  }catch(err){
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while adding to cart."
+    });
+  }
+}
+
+exports.remove_from_cart = async (req, res) => {
+  try{
+    const cust = await Customer.findOne({_id:req.body.customer_id});
+
+    for (item of req.body.items){
+      for(let i=0;i<cust.cart.items.length;i+=1){//(cart_item of cust.cart.items){
+        let cart_item = cust.cart.items[i];
+        if(item.item_id==cart_item.item_id){
+          console.log(cust.cart.items);
+          cust.cart.items.splice(i,1);
+          break;
+        }
+          
+      }
+    }
+    // cust.cart.modification_date = Date();
+
+  const updated_cust = await Customer.findByIdAndUpdate(cust._id,cust,{useFindAndModify: false});
+  res.send(updated_cust);
+  }catch(err){
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while removing from cart."
+    });
+  }
+}
+
+const Order = Db.orders;
+
+exports.make_shoping = async (req, res) => {
+  try{
+    const cust = await Customer.find({_id:req.customer_id});
+    const order = new Order({
+      oredered: cust.cart.items,
+      order_date : new Date()
+    });
+
+    const ord_id = await order.save(order)._id;
+
+    cust.hist.push(ord_id);
+    cust.cart.items = [];
+    cust.cart.modification_date = new Date();
+
+    const updated_cust = await Customer.findByIdAndUpdate(cust._id,cust,{useFindAndModify: false});
+    res.send(updated_cust);
+    return;
+
+  }catch(err){
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the Order."
+    });
+  }
+  
+
+}
