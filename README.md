@@ -266,12 +266,27 @@ W razie wszelkich problemów i wątpliwosći proszę o kontakt z obsługą klien
 W celu otrzymania danych z serwera bazodanowego należy kierować odpowiednie requesty na adres [http://localhost:3000/app/`<collection>s`](http://localhost:3000/app/items), gdzie `<collection>` to identyfikator danej kolekcji, tj.: dla kolekcji **item** poprawny adres http będzie wyglądał nastepująco: [http://localhost:3000/app/items](http://localhost:3000/app/items).
 
 # Postępy prac
-| Zadanie                               | Wykonano          | Kto                   |
-|:-------------:                        |:-------------:    |:-----:                |
-| Stworzyć plan bazy danych             |✅                 | Michał, Kamil,Paulina |
-| Dokonać podziału prac                 |✅                 | Michał, Kamil,Paulina |
-| zbudować serwer                       |✅                 | Kamil                 |
-| postawić aplikację angularową         |✅                 | Kamil                 |
-| utworzyć kontenery Docker             |✅                 | Michał                |
-| połączyć aplikację przez Dockera      |✅                 | Michał                |
-| Utworzyć dokumentację                 |✅                 | Michał                |
+| Zadanie                                             | Wykonano            | Kto                   |
+|:-------------:                                      |:-------------:      |:-----:                |
+| Stworzyć plan bazy danych                           |✅                   | Michał, Kamil,Paulina |
+| Dokonać podziału prac                               |✅                   | Michał, Kamil,Paulina |
+| zbudować serwer                                     |✅                   | Kamil                 |
+| postawić aplikację angularową                       |✅                   | Kamil                 |
+| utworzyć kontenery Docker                           |✅                   | Michał                |
+| połączyć aplikację przez Dockera                    |✅                   | Michał                |
+| Utworzyć dokumentację                               |✅                   | Michał                |
+| Dodać szatę graficzną strony                        |✅                   | Paulina               |
+| Obsługa pracowników na stronie                      |✅                   | Paulina               |
+| Dodać CRUD do wszystkich kolekcji (API)             |✅                   | Michał                |
+| Dodać autoryzację (API)                             |✅                   | Michał                |
+| Dodać możliwość kupowania (API)                     |✅                   | Michał                |
+| Dodać tworzenie raportów od - do  (API)             |                     |                       |
+| Dodać obsługę dostaw - dodawanie itemów  (API)      |                     |                       |
+| Dodać pobieranie itemów z danej kategorii (API)     |                     |                       |
+| Dodać wyszukiwanie dostwców dla danego itemu (API)  |                     |                       |
+| Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |                     |                       |
+| Uwzględnić nowe funkcjonalności na stronce*         |                     |                       |
+| Uzupełnić dokumentację o nowe funkcję               |                     |                       |
+| Uzupełnić dokumentację o opis struktury projektu    |                     |                       |
+
+*Później przy uzupełnianiu tego co zrobiliście, możecie rozbijać na mniejsze podzadania
