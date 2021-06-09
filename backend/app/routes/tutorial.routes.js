@@ -25,6 +25,7 @@ module.exports = app => {
         controllers.customers.remove_from_cart(req, res);
       }
     });
+    router.post("/customer/cart/buy", controllers.customers.buy);
 
     router.get("/:coll", function(req,res) {
       console.log(req.params.coll);
@@ -32,7 +33,6 @@ module.exports = app => {
     });
 
     router.post("/:coll", function(req,res) {
-      console.log(controllers[req.params.coll]);
       return controllers[req.params.coll].create(req,res);
     });
 

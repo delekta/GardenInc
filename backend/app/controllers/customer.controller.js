@@ -1,5 +1,6 @@
 const Db = require("../models");
 const Customer = Db.customers;
+const Item = Db.items;
 const oreders = require("../controllers/order.controller");
 
 // Create and Save a newCustomer
@@ -207,22 +208,32 @@ exports.remove_from_cart = async (req, res) => {
 
 const Order = Db.orders;
 
-exports.make_shoping = async (req, res) => {
+exports.buy = async (req, res) => {
   try{
-    const cust = await Customer.find({_id:req.customer_id});
+    const cust = await Customer.findOne({_id:req.body.customer_id});
+    console.log(cust.cart.items);
+    
+    let oredered = []
+
+    for(item of cust.cart.items){
+      oredered.push({
+        item_id:item.item_id,
+        amount:item.amount
+      });
+      let iteem = await Item.findOne({_id:item.item_id});
+      let change = {on_stock: (iteem.on_stock - item.amount)};
+      const updated_item = await Item.findByIdAndUpdate(item.item_id,change,{useFindAndModify: false});
+    }
+    
     const order = new Order({
-      oredered: cust.cart.items,
-      order_date : new Date()
+      ordered: oredered
     });
+    const ord = await order.save(order);
 
-    const ord_id = await order.save(order)._id;
-
-    cust.hist.push(ord_id);
+    cust.hist.push(ord._id);
     cust.cart.items = [];
-    cust.cart.modification_date = new Date();
 
     const updated_cust = await Customer.findByIdAndUpdate(cust._id,cust,{useFindAndModify: false});
-    res.send(updated_cust);
     return;
 
   }catch(err){

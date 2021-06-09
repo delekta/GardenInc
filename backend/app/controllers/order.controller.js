@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
   
-    order.find({})
+    Order.find({})
       .then(data => {
         console.log(data);
         res.send(data);
@@ -52,7 +52,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    order.findById(id)
+    Order.findById(id)
       .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found Order with id " + id });
@@ -94,7 +94,7 @@ exports.findOne = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    order.findByIdAndRemove(id)
+    Order.findByIdAndRemove(id)
       .then(data => {
         if (!data) {
           res.status(404).send({
@@ -115,7 +115,7 @@ exports.delete = (req, res) => {
 
 // Delete all Orders from the database.
 exports.deleteAll = (req, res) => {
-    order.deleteMany({})
+    Order.deleteMany({})
       .then(data => {
         res.send({
           message: `${data.deletedCount} Orders were deleted successfully!`
@@ -131,7 +131,7 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Orders
 exports.findAllPublished = (req, res) => {
-    order.find({ published: true })
+    Order.find({ published: true })
       .then(data => {
         res.send(data);
       })
