@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from 'src/app/services/customer.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class RejestrationComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
   }
@@ -28,15 +29,15 @@ export class RejestrationComponent implements OnInit {
       password: this.customer.password,
     };
 
-  //   this.itemService.create(data)
-  //     .subscribe(
-  //       response => {
-  //         console.log(response);
-  //         this.submitted = true;
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       });
-  // }
+    this.customerService.create(data)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.submitted = true;
+        },
+        error => {
+          console.log(error);
+        });
   }
 }
+

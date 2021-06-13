@@ -16,6 +16,8 @@ import { EmployeesListComponent } from './components/employees-list/employees-li
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { MainSiteComponent } from './components/main-site/main-site.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { AddDeliveryComponent } from './components/add-delivery/add-delivery.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FooterComponent } from './components/footer/footer.component';
     EmployeesListComponent,
     EmployeeCardComponent,
     MainSiteComponent,
-    FooterComponent
+    FooterComponent,
+    AddEmployeeComponent,
+    AddDeliveryComponent
   ],
   imports: [
     BrowserModule,
