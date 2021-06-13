@@ -1,10 +1,11 @@
 const db = require("../models");
 const Order = db.orders;
+const Items = db.items;
 
 // Create and Save a newOrder
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.ordered) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
@@ -142,3 +143,40 @@ exports.findAllPublished = (req, res) => {
         });
       });
   };
+
+
+exports.getReport = (req, res) => {
+  let from = new Date(req.body.from);
+  let to = new Date(req.body.to);
+  Order.find({order_date: {$gte: from, $lt: to}})
+  .then(data => {
+    report = {}
+    for(order of data){
+      for(item of order.ordered){
+        var currItem = getItem(item.item_id)
+        currItem.then((itemResolved => {
+          var name = itemResolved.name
+          console.log(name)
+          if(name in report){
+            report[name] += item.amount;
+          }
+          else{
+            report[name] = item.amount;
+          }
+          console.log(report)
+        }))
+      }
+    }
+    res.send(JSON.stringify(report))
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving Orders between dates."
+    });
+  });
+}
+
+async function getItem(id){
+  return await Items.findOne({"_id": id})
+}
