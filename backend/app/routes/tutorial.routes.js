@@ -40,7 +40,7 @@ module.exports = app => {
       return controllers[req.params.coll].findOne(req,res);
     });
 
-    router.get("/:coll/:id", function(req,res) {
+    router.post("/:coll/:id", function(req,res) {
       return controllers[req.params.coll].update(req,res);
     });
 
@@ -51,8 +51,6 @@ module.exports = app => {
     router.delete("/:coll", function(req,res) {
       return controllers[req.params.coll].deleteAll(req,res);
     });
-
-    
 
     app.use('/api', router);
   };
