@@ -160,3 +160,18 @@ exports.findAllPublished = (req, res) => {
       });
   };
 
+  exports.getAllCategoryItems = (req, res) => {
+    let category = req.params.category;
+    console.log(category);
+    Item.find({categories: category})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || `Some error occurred while retrieving items from category ${category}.`
+        });
+      });
+  }
+

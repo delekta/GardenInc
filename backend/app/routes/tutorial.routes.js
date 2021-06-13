@@ -1,4 +1,5 @@
 module.exports = app => {
+    // zbędne?
     const items = require("../controllers/item.controller.js");
     const employees = require("../controllers/employee.controller.js");
     const deliveries = require("../controllers/delivery.controller.js");
@@ -51,6 +52,11 @@ module.exports = app => {
     router.delete("/:coll", function(req,res) {
       return controllers[req.params.coll].deleteAll(req,res);
     });
+
+    // dodac pobieranie itemow z danej kategorii
+    router.get("/items/category/:category", function(req, res){
+      return controllers["items"].getAllCategoryItems(req, res)
+    })
 
     
 
