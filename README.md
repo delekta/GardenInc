@@ -22,14 +22,15 @@ Projekt przedstaiwa system obsługi internetowego sklepu ogrodniczego. Baza  dan
 - [x] Express.js
 - [x] Angular
 # Struktura projektu
-Projekt składa się z 3 bazowych elementów:
+Projekt składa się z 4 bazowych elementów:
  - Baza dnaych MongoDB przechowująca dokumenty w postaci struktury opisanej w rozdziale [Struktura bazy danych MongoDB](#struktura-bazy-danych-MongoDB),
- - serwer API komunikujący się z bazą danych, obsługujący zapytania wysyłane przez formularz internetowy,
- - SAP reprezentująca interfejs użytkownika, która w prosty i wygodny sposób umożliwia wprowadzania zmian oraz wydobywanie dancyh z bazy MongoDB.
+ - Skrypt cyklicznie wykonujący zrzut bazy danych oraz przywracanie jej zawartości przy starcie kontenerów (`backup`). Jego głównym zadaniem jest co minutę wykonywać zrzut danych z bazy, a także przy rozpoczęciu pracy przywrócenie ostanio utworzonego zestawu danych,
+ - serwer API komunikujący się z bazą danych, obsługujący zapytania wysyłane przez formularz internetowy. Zbudowany jest w oparciu o bibliotekę Express.js, przechowywany jest w katalogu `backend\app`. W jego skład wchodzą przede wszystkim modele dokumentowej bazy danych stworzone w oparciu o bibliotekę `Mongoose.js` (`backend\app\models`),a także kontrolery odpowiedzialne za modyfikację danych znajdujących się w bazie (`backend\app\controllers`). Poza tym w obrębie aplikacji możemy też znaleźć strukturę routingu opisaną w (`backend\app\routes`), konfigurację serwera, połączenia z bazą danych (`backend\app\config`) oraz główna część serwera (`backend\app\server.js`),
+ - SAP reprezentująca interfejs użytkownika, która w prosty i wygodny sposób umożliwia wprowadzania zmian oraz wydobywanie dancyh z bazy MongoDB. Została ona stworzona przez nas w katalogu `frontend\GardenInc` z wykrozystaniem frameworku Angular, z tego względu w większości jej struktura jest zgodna z wzorcami projektowymi oferowanymi przez bibliotekę. Nawjażniejszym elementem są serwisy (`frontend\GardenInc\src\app\services`), które odpowiadają za komunikację z serwerem bazodanowy. W tym celu wykorzystują one proste zapytania http. Komponenty (`frontend\GardenInc\src\app\components`) w głównej mierze odpowiedzialne są natomiast za wyświetlanie uzyskanych wyników działania.
 
 Wszystkie powyższe elementy są zamknięte w osobnych dockerowych kontenerach, połączonych siecią dostępną również poza obrębem kontenerów.
 
-**UWAGA**: Na potrzeby tworzenia i rozwoju projektu dane celowo zapisywane są w folderach zawartych w repozytorium, wczytywanych jako wolumeny do dockerowych kontenerów. Rozwiązanie to nie jest optymalne, docelowo baza danych będzie korzystała z osobnego wolumenu z danymi, w celu wyodrębnienia jej zależności z systemu plików.
+**UWAGA**: Na potrzeby tworzenia i rozwoju projektu zrzuty bazy danych celowo zapisywane są w folderze `tmp\backup` zawartym w repozytorium, a następnie wczytywanych do bazy danych przy uruchomieniu kontenera. Rozwiązanie to nie jest optymalne, docelowo baza danych będzie korzystała z osobnego wolumenu z danymi, w celu wyodrębnienia jej zależności z systemu plików.
 
 # Struktura bazy danych MongoDB
 Baza danych składa się z 8 kolekcji:
@@ -263,8 +264,48 @@ W razie wszelkich problemów i wątpliwosći proszę o kontakt z obsługą klien
 - fb: [Michał Faciszewski](https://www.facebook.com/profile.php?id=100004596824271)
 # API
 
-W celu otrzymania danych z serwera bazodanowego należy kierować odpowiednie requesty na adres [http://localhost:3000/app/`<collection>s`](http://localhost:3000/app/items), gdzie `<collection>` to identyfikator danej kolekcji, tj.: dla kolekcji **item** poprawny adres http będzie wyglądał nastepująco: [http://localhost:3000/app/items](http://localhost:3000/app/items).
+W celu otrzymania danych z serwera bazodanowego należy kierować odpowiednie requesty na adres [http://localhost:3000/api/`<collection>s`](http://localhost:3000/api/items), gdzie `<collection>` to identyfikator danej kolekcji, tj.: dla kolekcji **item** poprawny adres http będzie wyglądał nastepująco: [http://localhost:3000/api/items](http://localhost:3000/api/items). Serwer obsługuje dla każdej kolekcji wszystkie rodzaje zapytań CRUD, każda dodatkowa informacja jest przesyłana w formacie JSON:
+|Akcja|Typ zapytania|Scieżka|
+|:---:|:-----------:|:-----:|
+|Dodanie dokumentu do kolekcji|POST|[http://localhost:3000/api/`<collection>s`](http://localhost:3000/api/items)|
+|Odczytanie kolekcji|GET|[http://localhost:3000/api/`<collection>s`](http://localhost:3000/api/items)|
+|Odczytanie danego dokukentu kolekcji|GET|[http://localhost:3000/api/`<collection>s/id`](http://localhost:3000/api/items/60bfc293c28da1066125577a)|
+|Aktualizajcja dokumentu|POST|[http://localhost:3000/api/`<collection>s`/id](http://localhost:3000/api/items/60bfc293c28da1066125577a)|
+|Usunięcie dokumentu|DELETE|[http://localhost:3000/api/`<collection>s`/id](http://localhost:3000/api/items/60bfc293c28da1066125577a)|
+|Usunięcie całej kolekcji|DELETE|[http://localhost:3000/api/`<collection>s`](http://localhost:3000/api/items)|
 
+Ponadto stworzone przez nas api oferuje inne funkcjonalności służące obsłudze sklepu internetowego:
+## Autoryzacja
+W celu dokonania autoryzacji i umożliwienia klientowi dostępu do sklepu można wysłać zapytanie POST na adres [http://localhost:3000/api/auth](http://localhost:3000/api/auth), zawierające w JSONie email i hasło użtkownika. Po pozytywnej weryfikacji danych serwer zwróci id użytkonika, bądź w przeciwnym wypadku informację o błędzie.
+
+## Obsługa koszyka i zamówień
+Po pozytywnej autoryzacji, użytkownik ma możliwość dokonywania zakupów, poprzez dodawanie danych artykułów do koszyka, a następnie dokonania ich zakupu. Aby dodać artykuł do koszyka należy przekazać JSON o nastepującej strukturze, na adres [http://localhost:3000/api/customer/cart](http://localhost:3000/api/customer/cart) metodą POST:
+```json
+{
+  "customer_id":"60bd3efefbd863012d351c1c",
+  "items": [{
+      "item_id":"60bf8d3a568de3013f8327a2",
+      "amount": 5
+    }],
+  "add":true
+}
+```
+Natomiast jeśli chcemy usunąć dany artykuł z koszyka wykorzystujemy tę samą metodę i tą samą scieżkę adresu, jednakże modyfikujemy nieznacznie zawartosć JSONa
+```json
+{
+  "customer_id":"60bd3efefbd863012d351c1c",
+  "items": [{
+      "item_id":"60bf8d3a568de3013f8327a2"
+    }],
+  "add":false
+}
+```
+Na koniec aby dokonać zakupu należy z wykorzystaniem metody POST dokonać zakupou poprzez ścieżkę [http://localhost:3000/api/customer/cart/buy](http://localhost:3000/api/customer/cart/buy), przesyłając przy tym id klienta:
+```json
+{
+  "customer_id":"60bd3efefbd863012d351c1c"
+}
+```
 # Postępy prac
 | Zadanie                                             | Wykonano            | Kto                   |
 |:-------------:                                      |:-------------:      |:-----:                |
@@ -286,7 +327,7 @@ W celu otrzymania danych z serwera bazodanowego należy kierować odpowiednie re
 | Dodać wyszukiwanie dostwców dla danego itemu (API)  |                     |                       |
 | Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |                     |                       |
 | Uwzględnić nowe funkcjonalności na stronce*         |                     |                       |
-| Uzupełnić dokumentację o nowe funkcję               |                     |                       |
-| Uzupełnić dokumentację o opis struktury projektu    |                     |                       |
+| Uzupełnić dokumentację o nowe funkcję               |✅                   |Michał                 |
+| Uzupełnić dokumentację o opis struktury projektu    |✅                   |Michał                 |
 
 *Później przy uzupełnianiu tego co zrobiliście, możecie rozbijać na mniejsze podzadania
