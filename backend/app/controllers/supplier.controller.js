@@ -9,12 +9,38 @@ exports.create = (req, res) => {
       return;
     }
 
-    // Create an employee
+    // Create an supplier
     const supplier = new Supplier({
-      supplier : req.body.suppliered,
-      delivered : req.body.delivered,
-      supplier_date : req.body.supplier_date
+      company_name : req.body.company_name,
+      suply_category : [],
+      contact :{
+        mail: [],
+        phone_no: [],
+        address:{}
+      }
     });
+
+    if(req.body.suply_category){
+      for (category of req.body.suply_category){
+        supplier.suply_category.push(category);
+      }
+    }
+
+    if(req.body.contact){
+      if(req.body.constact.mail){
+        for (mail of req.body.contact.mail){
+          supplier.contact.mail.push(mail);
+        }
+      }
+      if(req.body.constact.phone_no){
+        for (phone of req.body.contact.phone_no){
+          supplier.contact.phone_no.push(phone);
+        }
+      }
+      if(req.body.constact.address){
+        supplier.contact.address = req.body.constact.address;
+      }
+    }
 
     // Save supplier in the database
     supplier
