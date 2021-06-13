@@ -134,9 +134,14 @@ exports.auth = (req,res)=>{
   Customer.find({email:req.body.email,password:req.body.password})
     .then(data=>{
       if(data.length==0){
-        res.send({auth:false});
+        res.send({
+          auth:false
+        });
       }else{
-        res.send({auth:true});
+        res.send({
+          auth:true,
+          customer_id:data[0]._id
+        });
       }
     })
     .catch(err=>{
