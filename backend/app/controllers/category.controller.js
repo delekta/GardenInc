@@ -7,11 +7,11 @@ exports.create = (req, res) => {
     if (!req.body.name) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
-    } 
-
+    }
+    this.add_new_category(req.body.name, req.body.sub_categories, req.body.parent_id, res)
   };
 
-exports.add_new_category = (cat,sub_cat,parent)=>{
+exports.add_new_category = (cat,sub_cat,parent, res)=>{
   const category = new Category({
     name: cat,
     sub_categories: sub_cat,

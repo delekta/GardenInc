@@ -20,6 +20,10 @@ module.exports = app => {
     router.post("/auth",controllers['customers'].auth);
 
     router.post("/suppliers/getfromcategory",controllers['suppliers'].getSuppliersSuppliyingCategory)
+      // dodac pobieranie itemow z danej kategorii
+      router.post("/itemsOfCategory", function(req, res){
+        return controllers.items.getAllCategoryItems(req, res)
+      })
 
     router.post("/customer/cart", function(req, res){
       if(req.body.add){
@@ -54,11 +58,6 @@ module.exports = app => {
     router.delete("/:coll", function(req,res) {
       return controllers[req.params.coll].deleteAll(req,res);
     });
-
-    // dodac pobieranie itemow z danej kategorii
-    router.get("/items/category/:category", function(req, res){
-      return controllers["items"].getAllCategoryItems(req, res)
-    })
 
     
 
