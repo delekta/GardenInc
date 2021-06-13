@@ -306,6 +306,16 @@ Na koniec aby dokonać zakupu należy z wykorzystaniem metody POST dokonać zaku
   "customer_id":"60bd3efefbd863012d351c1c"
 }
 ```
+
+## Obsługa dostaw i wyszukiwanie dostawców
+Dodawanie nowych dostawców i dostaw jest w głównej mierze oparte na rozszerzonych oprecjach CRUD. Np. przy dodawaniu nowej dostawy zmieniane są wartości dla każdego przedmiotu, który jest dostarczany, tak aby wartości te były aktualne. Dodatkowo uaktualniane są dane na temat dostarczanych przez dostawce kategorii tzn. jeśli dostawca A do tej posry dostarczał tylko kwiaty jego pole dostarczanych kategorii wygląda następująco: `supply_category:["flowers"]`, natomiast jeśli dokona on przynajmniej jednej dostawy sadzonek drzew pole dostarczanych kategorii zostanie zaktualizowne do wartości: `supply_category:["flowers", "trees"]`. Zabieg taki pozawala nam w łatwy wyciągnąć dostawców, którzy dostarczają dana kategorie produktów.
+Funkcjonalność tę możemy osiągnąć wysyłając zapytanie typu POST na adres [localhost:3000/api/suppliers/getfromcategory](localhost:3000/api/suppliers/getfromcategory). W przypadku gdy zapytanie jest puste, bądź posiada niepoprawne wartości serwer zwróci wszystkich dostawców dla wszystkich kategorii. Natomiast jeśli zostanie przesłany plik JSON w następującej postaci:
+```JSON
+{
+  "category":"categoryName"
+}
+```
+w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
 # Postępy prac
 | Zadanie                                             | Wykonano            | Kto                   |
 |:-------------:                                      |:-------------:      |:-----:                |
