@@ -19,6 +19,8 @@ module.exports = app => {
 
     router.post("/auth",controllers['customers'].auth);
 
+    router.post("/suppliers/getfromcategory",controllers['suppliers'].getSuppliersSuppliyingCategory)
+
     router.post("/customer/cart", function(req, res){
       if(req.body.add){
         controllers.customers.add_to_cart(req, res);
