@@ -22,6 +22,7 @@ import { CartListComponent } from './components/cart-list/cart-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { DeliveryListComponent } from './components/delivery-list/delivery-list.component';
 import { DeliveryItemComponent } from './components/delivery-item/delivery-item.component';
+import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DeliveryItemComponent } from './components/delivery-item/delivery-item.
     CartListComponent,
     CartItemComponent,
     DeliveryListComponent,
-    DeliveryItemComponent
+    DeliveryItemComponent,
+    AddSupplierComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-delivery-item',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliveryItemComponent implements OnInit {
 
+  @Input() specificDelivery : any;
+  
   constructor() { }
 
   ngOnInit(): void {

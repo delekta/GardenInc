@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddDeliveryComponent implements OnInit {
 
+  delivery : any;
+  submitted = false;
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,124 @@
+<div style="width: 400px; margin: auto;">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="companyName">Nazwa firmy</label>
+          <input
+            type="text"
+            class="form-control"
+            id="companyName"
+            required
+            [(ngModel)]="supplier.company_name"
+            name="companyName"
+          />
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="supply_category">Kategorie</label>
+          <input
+            class="form-control"
+            id="supply_category"
+            required
+            [(ngModel)]="supplier.supply_category"
+            name="supply_category"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="mail">E-mail</label>
+          <input
+            class="form-control"
+            id="mail"
+            required
+            [(ngModel)]="supplier.mail"
+            name="mail"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Telefonyk</label>
+          <input
+            class="form-control"
+            id="phone"
+            required
+            [(ngModel)]="supplier.phone"
+            name="phone"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="street">Ulica</label>
+          <input
+            class="form-control"
+            id="street"
+            required
+            [(ngModel)]="supplier.street"
+            name="street"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="building_no">Numer budynku</label>
+            <input
+              class="form-control"
+              id="building_no"
+              required
+              [(ngModel)]="supplier.building_no"
+              name="building_no"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="flat_no">Numer mieszkania</label>
+            <input
+              class="form-control"
+              id="flat_no"
+              required
+              [(ngModel)]="supplier.flat_no"
+              name="flat_no"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="city">Miasto</label>
+            <input
+              class="form-control"
+              id="city"
+              required
+              [(ngModel)]="supplier.city"
+              name="city"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="postal_code">Kod pocztowy</label>
+            <input
+              class="form-control"
+              id="postal_code"
+              required
+              [(ngModel)]="supplier.postal_code"
+              name="postal_code"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="post">Poczta</label>
+            <input
+              class="form-control"
+              id="post"
+              required
+              [(ngModel)]="supplier.post"
+              name="post"
+            />
+          </div> -->
+
+
+        <button (click)="saveItem()" class="btn btn-success">Submit</button>
+      </div>
+
+      <div *ngIf="submitted">
+        <h4>You submitted successfully!</h4>
+        <!-- <button class="btn btn-success" (click)="newItem()">Add</button> -->
+      </div>
+    </div>
+  </div>

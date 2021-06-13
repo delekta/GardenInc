@@ -1,1 +1,4 @@
-<p>delivery-item works!</p>
+<div class="delivery-card" *ngIf="specificDelivery">
+    <p>Dostawca: {{specificDelivery._id}}</p>
+    <p>Data: {{specificDelivery.return_date}}</p>
+</div>

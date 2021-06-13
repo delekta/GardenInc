@@ -1,1 +1,8 @@
-<p>delivery-list works!</p>
+<div id=container-main>
+    <h2 id="caption">Deliveries</h2><br>
+    <app-add-delivery></app-add-delivery>
+    <div id=container-list>
+        <app-delivery-item *ngFor = "let delivery of deliveries; let i = index" [specificDelivery]="delivery"></app-delivery-item>
+    </div>
+    
+</div>
