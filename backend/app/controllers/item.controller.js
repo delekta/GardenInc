@@ -203,16 +203,19 @@ exports.findAllPublished = (req, res) => {
 
 
   async function getAllSubcategories(category, res=[]){
-    console.log(category)
-    category = await getCategory(category)
-    console.log(category)
-    if(!category.sub_categories.length){
+    // console.log(category)
+    cat = await getCategory(category)
+    // console.log(category)
+    if(!cat.sub_categories.length){
       res += [category.name]
+      // console.log(category)
       return res
     }else{
-      for(sub of category.sub_categories){
-        res = getAllSubcategories(sub, res)
+      for(sub of cat.sub_categories){
+        res = await getAllSubcategories(sub, res)
       }
+      console.log("res")
+      console.log(res)
       return res
     }
   }
