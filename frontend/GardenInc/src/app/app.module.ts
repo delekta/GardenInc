@@ -18,6 +18,10 @@ import { MainSiteComponent } from './components/main-site/main-site.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { AddDeliveryComponent } from './components/add-delivery/add-delivery.component';
+import { CartListComponent } from './components/cart-list/cart-list.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { DeliveryListComponent } from './components/delivery-list/delivery-list.component';
+import { DeliveryItemComponent } from './components/delivery-item/delivery-item.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { AddDeliveryComponent } from './components/add-delivery/add-delivery.com
     MainSiteComponent,
     FooterComponent,
     AddEmployeeComponent,
-    AddDeliveryComponent
+    AddDeliveryComponent,
+    CartListComponent,
+    CartItemComponent,
+    DeliveryListComponent,
+    DeliveryItemComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,9 @@ const baseUrl = 'http://localhost:3000/api/customers';
 })
 export class CustomerService {
 
+  currID : String = ' ';
+  logged = false;
+
   constructor(private http: HttpClient) {
   }
 
@@ -32,7 +35,15 @@ export class CustomerService {
    return this.http.delete(`${baseUrl}/${id}`);
  }
 
- auth(email: any, password: any): Observable<any>{
-   return this.http.post(baseUrl, email, password);
+ auth(data : any): Observable<any>{
+   return this.http.post('http://localhost:3000/api/auth', data);
+ }
+
+ add_to_cart(data : any):  Observable<any> {
+  return this.http.post('http://localhost:3000/api/customer/cart', data);
+ }
+
+ buy(data : any): Observable<any> {
+   return this.http.post('http://localhost:3000/api/customer/cart/buy', data);
  }
 }

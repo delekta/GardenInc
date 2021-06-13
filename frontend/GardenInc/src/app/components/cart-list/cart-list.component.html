@@ -1,0 +1,7 @@
+<div id=container-main>
+    <h2 id="caption">Koszyk klienta</h2><br>
+    <div id=container-list>
+        <app-cart-item *ngFor = "let item of clients_cart; let i = index" [specificItem]="item"></app-cart-item>
+        <button type="button" (click)="buy()">Kup</button>
+    </div>
+</div>

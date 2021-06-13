@@ -34,10 +34,35 @@ export class RejestrationComponent implements OnInit {
         response => {
           console.log(response);
           this.submitted = true;
+          this.authentication(data);
         },
         error => {
           console.log(error);
+        }); 
+  }
+
+  authentication(data : any): void {
+    console.log(data.email, data.password);
+    //const info = {"email" : data.email, "password" : data.password};
+    this.customerService.auth(data)
+      .subscribe(
+        response => {
+          console.log(response.auth);
+          if(response.auth)
+          {
+             console.log(response.customer_id)
+             this.customerService.currID = response.customer_id;
+             console.log(this.customerService.currID);
+             this.customerService.logged =true;
+          }
+         
+        },
+        error => {
+          console.log("Error while auth");
         });
   }
+
+  
+
 }
 
