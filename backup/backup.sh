@@ -12,7 +12,7 @@ sleep 5
 if [ -n "$MAX_BACKUPS" ]; then
   while [ "$(find /backup -maxdepth 1 | wc -l)" -gt "$MAX_BACKUPS" ]
   do
-    TARGET=$(find /backup -maxdepth 1 | sort | tail -1)
+    TARGET=$(find /backup -maxdepth 1 | sort | tail -2 | head -1)
     rm -rf "$TARGET"
     echo "Backup $TARGET is deleted"
   done

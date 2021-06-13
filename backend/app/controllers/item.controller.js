@@ -1,5 +1,6 @@
 const db = require("../models");
 const Item = db.items;
+const Category = db.categories;
 const category_controller = require("../controllers/category.controller");
 
 // Create and Save a newItem
@@ -37,7 +38,7 @@ exports.create = (req, res) => {
       db.categories.find({name:category})
       .then(data=>{
         if(data.length==0)
-          category_controller.add_new_category(category,[],null);
+          category_controller.add_new_category(category, [], null, res);
       })
       .catch(err => {
         res.status(500).send({
@@ -160,4 +161,67 @@ exports.findAllPublished = (req, res) => {
         });
       });
   };
+
+  exports.getAllCategoryItems = (req, res) => {
+    let category = req.body.category;
+    console.log(category);
+    Category.findOne({name: category})
+    .then(data => {
+      console.log(data)
+      acceptedCategories = getAllSubcategories(data.name)
+      console.log("[accepted categories before resolving]")
+      console.log(acceptedCategories)
+      acceptedCategories.then(accepted => {
+        console.log("[accepted categories after resolving]")
+        console.log(accepted);
+        Item.find({categories: {$in: accepted}})
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || `Some error occurred while retrieving items from accepted categories ${category}.`
+          });
+        });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || `Waiting for accepted categories.`
+        });
+      });
+      
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || `Some error occurred while searching for category ${category}.`
+      });
+    });
+    
+  }
+
+
+  async function getAllSubcategories(category, res=[]){
+    // console.log(category)
+    cat = await getCategory(category)
+    // console.log(category)
+    if(!cat.sub_categories.length){
+      res += [category.name]
+      // console.log(category)
+      return res
+    }else{
+      for(sub of cat.sub_categories){
+        res = await getAllSubcategories(sub, res)
+      }
+      console.log("res")
+      console.log(res)
+      return res
+    }
+  }
+
+  function getCategory(name){
+    return Category.findOne({name: name})
+  }
 

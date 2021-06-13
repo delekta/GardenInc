@@ -1,4 +1,5 @@
 module.exports = app => {
+    // zbędne?
     const items = require("../controllers/item.controller.js");
     const employees = require("../controllers/employee.controller.js");
     const deliveries = require("../controllers/delivery.controller.js");
@@ -17,6 +18,12 @@ module.exports = app => {
     };
 
     router.post("/auth",controllers['customers'].auth);
+
+    router.post("/suppliers/getfromcategory",controllers['suppliers'].getSuppliersSuppliyingCategory)
+      // dodac pobieranie itemow z danej kategorii
+      router.post("/itemsOfCategory", function(req, res){
+        return controllers.items.getAllCategoryItems(req, res)
+      })
 
     router.post("/customer/cart", function(req, res){
       if(req.body.add){
@@ -40,7 +47,7 @@ module.exports = app => {
       return controllers[req.params.coll].findOne(req,res);
     });
 
-    router.get("/:coll/:id", function(req,res) {
+    router.post("/:coll/:id", function(req,res) {
       return controllers[req.params.coll].update(req,res);
     });
 

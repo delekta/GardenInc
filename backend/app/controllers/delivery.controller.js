@@ -1,23 +1,55 @@
 const db = require("../models");
 const Delivery = db.deliveries;
+const Supplier = db.suppliers;
+const Item = db.items;
 
 // Create and Save a newItem
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.supplier_id || !req.body.delivered) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-  
-    // Create an employee
+
+    // set new categories delivered by supplier and modify amount of items on stock
+
+    try{
+        let supplier = await Supplier.findOne({_id:req.body.supplier_id});
+        for (item of req.body.delivered){
+          let detailed_item = await Item.findOne({_id:item.item_id});
+          detailed_item.on_stock += item.amount;
+          let update = Item.findByIdAndUpdate(item.item_id, detailed_item, { useFindAndModify: false });
+          for (item_cat of detailed_item.categories){
+            found = false;
+            for (sup_cat of supplier.supply_category){
+              if (sup_cat==item_cat){
+                found=true;
+                break;
+              }
+            }
+            if(!found){
+              console.log("Adding new category");
+              supplier.supply_category.push(item_cat);
+              console.log(supplier);
+            }
+          }
+          await update;
+        }
+        let update = await Supplier.findByIdAndUpdate(req.body.supplier_id, supplier, { useFindAndModify: false });
+    }catch{
+        res.status(500).send({
+          message:
+            "Particular item or supplier doesnt exist."+ err.message
+        });
+        return;
+      }
+    // Create an delivery
     const delivery = new Delivery({
       supplier_id : req.body.supplier_id,
-      delivered : req.body.delivered,
-      delivery_date : req.body.delivery_date
-      
+      delivered : req.body.delivered
     });
   
-    // Save Item in the database
+    // Save delivery in the database
     delivery
       .save(delivery)
       .then(data => {
@@ -26,9 +58,10 @@ exports.create = (req, res) => {
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Item."
+            err.message || "Some error occurred while adding new delivery."
         });
       });
+
   };
   
 
