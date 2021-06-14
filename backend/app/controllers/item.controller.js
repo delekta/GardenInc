@@ -161,44 +161,19 @@ exports.findAllPublished = (req, res) => {
       });
   };
 
-  exports.getAllCategoryItems = (req, res) => {
+  exports.getAllCategoryItems = async (req, res) => {
     let category = req.body.category;
     console.log(category);
-    Category.findOne({name: category})
-    .then(data => {
-      console.log(data)
-      acceptedCategories = getAllSubcategories(data.name)
-      console.log("[accepted categories before resolving]")
-      console.log(acceptedCategories)
-      acceptedCategories.then(accepted => {
-        console.log("[accepted categories after resolving]")
-        console.log(accepted);
-        Item.find({categories: {$in: accepted}})
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || `Some error occurred while retrieving items from accepted categories ${category}.`
-          });
-        });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || `Waiting for accepted categories.`
-        });
-      });
-      
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || `Some error occurred while searching for category ${category}.`
-      });
-    });
-    
+    let data = await Category.findOne({name: category})
+    console.log(data)
+    acceptedCategories = getAllSubcategories(data.name)
+    console.log("[accepted categories before resolving]")
+    console.log(acceptedCategories)
+    let accepted = await acceptedCategories
+    console.log("[accepted categories after resolving]")
+    console.log(accepted);
+    let data2 = await Item.find({categories: {$in: accepted}})
+    res.send(data2);
   }
 
 
@@ -207,8 +182,8 @@ exports.findAllPublished = (req, res) => {
     cat = await getCategory(category)
     // console.log(category)
     if(!cat.sub_categories.length){
-      res += [category.name]
-      // console.log(category)
+      res.push(cat.name)
+      // console.log(cat)
       return res
     }else{
       for(sub of cat.sub_categories){
