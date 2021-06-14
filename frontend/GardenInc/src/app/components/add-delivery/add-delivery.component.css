@@ -1,0 +1,20 @@
+.row
+{
+    display: inline-flex;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+li
+{
+    margin : 15px;
+}
+
+button
+{
+    height: 30px;
+    margin :15px;
+}

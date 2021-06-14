@@ -7,5 +7,5 @@
     
     <li *ngIf = 'ifLogged()' class="login" routerLink= "login" routerLinkActive="active">Zaloguj</li>
     <li *ngIf = 'ifLogged()' class="login" routerLink= "rejestration" routerLinkActive="active">Zarejestruj</li>
-    <li class="cart" routerLink= "cart-list" routerLinkActive="active">Koszyk</li>
+    <li *ngIf = '!ifLogged()'class="cart" routerLink= "cart-list" routerLinkActive="active">Koszyk</li>
 </ul>

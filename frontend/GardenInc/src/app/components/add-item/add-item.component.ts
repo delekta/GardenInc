@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+// import * as EventEmitter from 'events';
 import { ItemService } from 'src/app/services/item.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class AddItemComponent implements OnInit {
     photo : ''
   };
 
+  data : any;
   submitted = false;
+  @Output() newItemEvent = new EventEmitter<Object>();
 
   constructor(private itemService: ItemService) { }
 
@@ -24,7 +27,8 @@ export class AddItemComponent implements OnInit {
   }
 
   saveItem(): void {
-    const data = {
+
+    this.data = {
       name: this.item.name,
       price: this.item.price,
       categories: this.item.categories,
@@ -32,15 +36,37 @@ export class AddItemComponent implements OnInit {
       photo : this.item.photo
     };
 
-    this.itemService.create(data)
+    if(this.item.name)
+    {
+      this.itemService.findByName(this.item.name)
       .subscribe(
         response => {
           console.log(response);
-          this.submitted = true;
+          if(response.length == 0 && this.item.photo && this.item.on_stock>0)
+          {
+          
+              this.itemService.create(this.data)
+                .subscribe(
+                  resp => {
+                    console.log(resp);
+                    this.submitted = true;
+                  },
+                  error => {
+                    console.log(error);
+                  });
+
+              this.newItemEvent.emit({item_id : response.id, amout : this.data.on_stock});
+          }
+          else
+          {
+            if(this.data.on_stock>0)
+              this.newItemEvent.emit({item_id : response.id, amout : this.data.on_stock})
+          }
         },
         error => {
-          console.log(error);
-        });
+          console.log("Error while getting data by name");
+        })
+    }
   }
 
   newItem(): void {

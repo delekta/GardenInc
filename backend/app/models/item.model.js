@@ -7,7 +7,8 @@ module.exports = mongoose => {
           price: Number,
           tax: Number,
           on_stock: Number,
-          categories: Array
+          categories: Array,
+          photo: String
         },
         { timestamps: true }
       )

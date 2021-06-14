@@ -1,6 +1,10 @@
 <div id=container-main>
-    <p>Kategoria: Wszyskie</p>
-    <h2 id="caption">Lista produktów</h2><br>
+    <select style="float: left"  [(ngModel)] = "selectedCategory">
+        <option>Wszystko</option>
+        <option *ngFor = "let category of categories">{{category.name}}</option>
+    </select>
+    <button type="submit" (click) = "Filter()">Filtruj</button>
+    <p>Kategoria: Wszyskie</p><br>
     <div id=container-list>
         <app-item-card *ngFor = "let item of items; let i = index" [specificItem]="item"></app-item-card>
     </div>

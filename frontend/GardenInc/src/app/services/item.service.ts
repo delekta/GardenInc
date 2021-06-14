@@ -38,4 +38,8 @@ export class ItemService {
   findByName(name: any): Observable<any> {
     return this.http.get(`${baseUrl}?name=${name}`);
   }
+
+  getByCategory(data: any): Observable<any> {
+    return this.http.post('http://localhost:3000/api/itemsOfCategory', data);
+  }
 }
