@@ -1,10 +1,11 @@
 const db = require("../models");
 const Order = db.orders;
+const Items = db.items;
 
 // Create and Save a newOrder
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.ordered) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
@@ -142,3 +143,37 @@ exports.findAllPublished = (req, res) => {
         });
       });
   };
+
+
+exports.getReport = async (req, res) => {
+  let from = new Date(req.body.from);
+  let to = new Date(req.body.to);
+  let data = await Order.find({order_date: {$gte: from, $lt: to}})
+  let report = {};
+  for(order of data){
+    for(item of order.ordered){
+      var currItem = await Items.findOne({"_id": item.item_id})
+      var name = currItem.name
+      console.log(name)
+      if(name in report){
+        report[name].amount += item.amount;
+      }
+      else{
+        report[name] = {
+          amount: item.amount,
+          price: currItem.price
+        }
+      }
+      console.log(report)
+    }
+  }
+  let reportArray = []
+  for(let [key, value] of Object.entries(report)){
+    reportArray.push({
+      name: key,
+      price: value.price,
+      amount: value.amount
+    })
+  }
+  res.send(JSON.stringify(reportArray))
+}
