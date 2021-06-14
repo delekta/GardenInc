@@ -145,38 +145,35 @@ exports.findAllPublished = (req, res) => {
   };
 
 
-exports.getReport = (req, res) => {
+exports.getReport = async (req, res) => {
   let from = new Date(req.body.from);
   let to = new Date(req.body.to);
-  Order.find({order_date: {$gte: from, $lt: to}})
-  .then(data => {
-    report = {}
-    for(order of data){
-      for(item of order.ordered){
-        var currItem = getItem(item.item_id)
-        currItem.then((itemResolved => {
-          var name = itemResolved.name
-          console.log(name)
-          if(name in report){
-            report[name] += item.amount;
-          }
-          else{
-            report[name] = item.amount;
-          }
-          console.log(report)
-        }))
+  let data = await Order.find({order_date: {$gte: from, $lt: to}})
+  let report = {};
+  for(order of data){
+    for(item of order.ordered){
+      var currItem = await Items.findOne({"_id": item.item_id})
+      var name = currItem.name
+      console.log(name)
+      if(name in report){
+        report[name].amount += item.amount;
       }
+      else{
+        report[name] = {
+          amount: item.amount,
+          price: currItem.price
+        }
+      }
+      console.log(report)
     }
-    res.send(JSON.stringify(report))
-  })
-  .catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving Orders between dates."
-    });
-  });
-}
-
-async function getItem(id){
-  return await Items.findOne({"_id": id})
+  }
+  let reportArray = []
+  for(let [key, value] of Object.entries(report)){
+    reportArray.push({
+      name: key,
+      price: value.price,
+      amount: value.amount
+    })
+  }
+  res.send(JSON.stringify(reportArray))
 }
