@@ -8,7 +8,7 @@
             class="form-control"
             id="name"
             required
-            [(ngModel)]="item.name"
+            [(ngModel)]="delivery.name"
             name="name"
           />
         </div>
@@ -19,7 +19,7 @@
             class="form-control"
             id="price"
             required
-            [(ngModel)]="item.price"
+            [(ngModel)]="delivery.price"
             name="price"
           />
         </div>
@@ -30,7 +30,7 @@
             class="form-control"
             id="categories"
             required
-            [(ngModel)]="item.categories[0]"
+            [(ngModel)]="delivery.categories[0]"
             name="categories"
           />
         </div>
@@ -41,7 +41,7 @@
             class="form-control"
             id="on_stock"
             required
-            [(ngModel)]="item.on_stock"
+            [(ngModel)]="delivery.on_stock"
             name="on_stock"
           />
         </div>
@@ -52,17 +52,17 @@
             class="form-control"
             id="photo"
             required
-            [(ngModel)]="item.photo"
+            [(ngModel)]="delivery.photo"
             name="photo"
           />
         </div>
 
-        <button (click)="saveItem()" class="btn btn-success">Submit</button>
+        <!-- <button (click)="saveItem()" class="btn btn-success">Submit</button> -->
       </div>
 
       <div *ngIf="submitted">
         <h4>You submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newItem()">Add</button>
+        <!-- <button class="btn btn-success" (click)="newItem()">Add</button> -->
       </div>
     </div>
   </div>

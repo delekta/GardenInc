@@ -331,11 +331,11 @@ w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
 | Dodać CRUD do wszystkich kolekcji (API)             |✅                   | Michał                |
 | Dodać autoryzację (API)                             |✅                   | Michał                |
 | Dodać możliwość kupowania (API)                     |✅                   | Michał                |
-| Dodać tworzenie raportów od - do  (API)             |                     |                       |
+| Dodać tworzenie raportów od - do  (API)             |✅                   | Kamil                 |
 | Dodać obsługę dostaw - dodawanie itemów  (API)      |                     |                       |
-| Dodać pobieranie itemów z danej kategorii (API)     |                     |                       |
+| Dodać pobieranie itemów z danej kategorii (API)     |✅                   | Kamil                 |
 | Dodać wyszukiwanie dostwców dla danego itemu (API)  |                     |                       |
-| Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |                     |                       |
+| Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |✅                    |Kamil                       |
 | Uwzględnić nowe funkcjonalności na stronce*         |                     |                       |
 | Uzupełnić dokumentację o nowe funkcję               |✅                   |Michał                 |
 | Uzupełnić dokumentację o opis struktury projektu    |✅                   |Michał                 |

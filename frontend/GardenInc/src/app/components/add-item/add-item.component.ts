@@ -11,7 +11,9 @@ export class AddItemComponent implements OnInit {
   item = {
     name: '',
     price: 0,
-    categories: Array()
+    categories: Array(),
+    on_stock : 0,
+    photo : ''
   };
 
   submitted = false;
@@ -25,7 +27,9 @@ export class AddItemComponent implements OnInit {
     const data = {
       name: this.item.name,
       price: this.item.price,
-      categories: this.item.categories
+      categories: this.item.categories,
+      on_stock : this.item.on_stock,
+      photo : this.item.photo
     };
 
     this.itemService.create(data)
@@ -44,7 +48,9 @@ export class AddItemComponent implements OnInit {
     this.item = {
       name: '',
       price: 0,
-      categories: []
+      categories: [],
+      on_stock : 0,
+      photo : ''
     };
   }
 

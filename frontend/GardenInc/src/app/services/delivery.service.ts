@@ -2,15 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseUrl = 'http://localhost:3000/api/customers';
+const baseUrl = 'http://localhost:3000/api/deliveries';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-
-  currID : String = ' ';
-  logged = false;
+export class DeliveryService {
 
   constructor(private http: HttpClient) {
   }
@@ -33,17 +30,5 @@ export class CustomerService {
 
  delete(id: any): Observable<any> {
    return this.http.delete(`${baseUrl}/${id}`);
- }
-
- auth(data : any): Observable<any>{
-   return this.http.post('http://localhost:3000/api/auth', data);
- }
-
- add_to_cart(data : any):  Observable<any> {
-  return this.http.post('http://localhost:3000/api/customer/cart', data);
- }
-
- buy(data : any): Observable<any> {
-   return this.http.post('http://localhost:3000/api/customer/cart/buy', data);
  }
 }
