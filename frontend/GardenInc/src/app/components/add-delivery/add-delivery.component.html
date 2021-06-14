@@ -2,7 +2,7 @@
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">Company Name</label>
           <input
             type="text"
             class="form-control"
@@ -11,52 +11,38 @@
             [(ngModel)]="delivery.name"
             name="name"
           />
-        </div>
+        </div><br>
 
-        <div class="form-group">
-          <label for="price">Price</label>
-          <input
-            class="form-control"
-            id="price"
-            required
-            [(ngModel)]="delivery.price"
-            name="price"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="categories">Categories</label>
-          <input
-            class="form-control"
-            id="categories"
-            required
-            [(ngModel)]="delivery.categories[0]"
-            name="categories"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="on_stock">On Stock</label>
-          <input
-            class="form-control"
-            id="on_stock"
-            required
-            [(ngModel)]="delivery.on_stock"
-            name="on_stock"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="photo">Photo Url</label>
-          <input
-            class="form-control"
-            id="photo"
-            required
-            [(ngModel)]="delivery.photo"
-            name="photo"
-          />
-        </div>
-
+        <app-add-item (newItemEvent) = "addItem($event)"></app-add-item>
+        <!-- <ul>
+            <div class=row>
+                    <li>
+                    <label for="product">Product</label>
+                    <input
+                        class="form-control"
+                        type = "text"
+                        id="product"
+                        required
+                        [(ngModel)]="delivery.product"
+                        name="product"
+                    />
+                    </li>
+        
+                    <li>
+                        <label for="amount">Amount</label>
+                        <input
+                        class="form-control"
+                        type = "text"
+                        id="amount"
+                        required
+                        [(ngModel)]="delivery.amount"
+                        name="amount"
+                        />
+                    </li>
+                    <button type="button">Add</button>
+            </div>
+           
+        </ul> -->
         <!-- <button (click)="saveItem()" class="btn btn-success">Submit</button> -->
       </div>
 

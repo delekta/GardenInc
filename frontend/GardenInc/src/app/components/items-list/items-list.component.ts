@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-items-list',
@@ -9,14 +10,17 @@ import { ItemService } from 'src/app/services/item.service';
 export class ItemsListComponent implements OnInit {
 
   items: any;
+  categories: any;
   currentItem = null;
   currentIndex = -1;
+  selectedCategory='';
   name = '';
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private categoryService : CategoriesService) { }
 
   ngOnInit(): void {
     this.retrieveItems();
+    this.retrieveCategories();
   }
 
   retrieveItems(): void {
@@ -65,5 +69,41 @@ export class ItemsListComponent implements OnInit {
           console.log(error);
         });
   }
+
+retrieveCategories(): void {
+  this.categoryService.getAll()
+    .subscribe(
+      data => {
+        this.categories = data;
+        console.log(this.categories);
+      },
+      error => {
+        console.log(error);
+      });
 }
 
+Filter()
+{
+  console.log(this.selectedCategory);
+  const categ = {category : this.selectedCategory};
+  console.log(categ);
+  if(categ.category != 'Wszystko')
+  {
+     this.itemService.getByCategory(categ)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.items = data;
+      },
+      error => {
+        console.log("Error");
+      })
+  }
+  else
+  {
+    this.retrieveItems();
+  }
+ 
+}
+
+}

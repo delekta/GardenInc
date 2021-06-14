@@ -25,12 +25,13 @@ export class AddSupplierComponent implements OnInit {
 
   saveItem(): void {
     const data = {
-      name: this.supplier.company_name,
+      company_name: this.supplier.company_name,
       // price: this.item.price,
       // categories: this.item.categories,
       // on_stock : this.item.on_stock,
       // photo : this.item.photo
     };
+    console.log(data);
 
     this.supplierService.create(data)
       .subscribe(

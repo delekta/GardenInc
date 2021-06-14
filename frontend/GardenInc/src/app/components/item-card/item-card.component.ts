@@ -10,6 +10,7 @@ import { ItemService } from 'src/app/services/item.service';
 export class ItemCardComponent implements OnInit {
 
   @Input() specificItem : any;
+  amountProduct =1;
 
   constructor(private itemService: ItemService, private customerService : CustomerService) { }
 
@@ -21,7 +22,7 @@ export class ItemCardComponent implements OnInit {
 
     const data = {
       customer_id : this.customerService.currID,
-      items : [{item_id : this.specificItem._id, amount : 1}],
+      items : [{item_id : this.specificItem._id, amount : this.amountProduct}],
       add : true
     };
 
@@ -35,6 +36,16 @@ export class ItemCardComponent implements OnInit {
           console.log("Error while adding to the cart");
         });
 
+  }
+
+  addAmount()
+  {
+    this.amountProduct+=1;
+  }
+
+  decreaseAmount()
+  {
+    this.amountProduct-=1;
   }
 
 

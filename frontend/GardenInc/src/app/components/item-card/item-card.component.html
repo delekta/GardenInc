@@ -1,8 +1,12 @@
 <!-- <p onclick="getItem()">item-card</p> -->
 <div class="item-card" *ngIf="specificItem">
     <!-- <p>{{specificItem}}</p> -->
-    <p>Name: {{specificItem.name}}</p>
-    <p>Price: {{specificItem.price}}</p>
+    <img src="{{specificItem.photo}}">
+    <p><b>{{specificItem.name}}</b></p>
+    <p> {{specificItem.price}}/szt.</p>
+    <p>{{amountProduct}}</p>
+    <p (click) = "addAmount()" class="amount">+</p>
+    <p (click) = "decreaseAmount()" class="amount">-</p><br>
     <button type="button" (click)="add_to_cart()">Do koszyka</button>
     <button type="button">Edytuj</button>
 </div>

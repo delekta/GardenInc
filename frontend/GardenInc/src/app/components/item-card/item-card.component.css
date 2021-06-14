@@ -1,12 +1,12 @@
 
 .item-card
 {
-    width: 200px;
-    height: 250px;
+    width: 250px;
+    height: 390px;
     margin: 10px 10px;
-    background-color: rgb(229, 255, 208);
-    border-radius: 5px;
-    box-shadow: rgb(207, 207, 207) 3px 2px 1px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1px;
+    box-shadow: rgb(207, 207, 207) 2px 1px 15px 5px;
     margin-top: 5px;
     float: left;
 }
@@ -15,4 +15,26 @@ p
 {
     font-size: 20px;
     font-family: 'Abel', sans-serif;
+    margin-left: 10%;
+}
+
+img{
+    width: 80%;
+    height : auto;
+    margin: 5% 10%;
+}
+button
+{
+    clear: both;
+    margin-left: 15%;
+    background-color: rgb(106, 122, 106);
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+}
+
+.amount
+{
+    float: left;
+    margin-left: 15px;
 }
