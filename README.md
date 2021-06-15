@@ -365,9 +365,9 @@ Serwer zwraca tablicę elementów postaci:
 | Dodać autoryzację (API)                             |✅                   | Michał                |
 | Dodać możliwość kupowania (API)                     |✅                   | Michał                |
 | Dodać tworzenie raportów od - do  (API)             |✅                   | Kamil                 |
-| Dodać obsługę dostaw - dodawanie itemów  (API)      |                     |                       |
+| Dodać obsługę dostaw - dodawanie itemów  (API)      |✅                   | Michał                |
 | Dodać pobieranie itemów z danej kategorii (API)     |✅                   | Kamil                 |
-| Dodać wyszukiwanie dostwców dla danego itemu (API)  |                     |                       |
+| Dodać wyszukiwanie dostwców dla danej kategorii (API)  |✅                | Michał                |
 | Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |✅                    |Kamil                       |
 | Uwzględnić nowe funkcjonalności na stronce*         |                     |                       |
 | Uzupełnić dokumentację o nowe funkcję               |✅                   |Michał                 |
