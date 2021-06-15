@@ -317,7 +317,7 @@ Funkcjonalność tę możemy osiągnąć wysyłając zapytanie typu POST na adre
 ```
 w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
 ## Wyszukiwanie przedmiotów z danych kategorii i ich subkategorii
-Hierarchia głównych kategorii
+Hierarchia głównych kategorii:
 <img src="./imgs/hierarchia.png" alt="Hierarchia">
 
 Na stronie mamy możliwość przeglądania dostępnych przedmiotów. Mechanizm filtrowania oparty jest o hierarchie kategorii zamieszczoną wyżej.
@@ -330,6 +330,25 @@ Ciało zapytania ma postać:
 }
 ```
 Serwer zwraca tablicę wszystkich przedmiotów które należą do wybranych kategorii.
+
+## Sporządzanie raportów sprzedanych przedmiotów
+Serwer daje możliwość sporządzenia raportu sprzedanych przedmiotów w danym okresie. Klient wysyła zapytanie POST [localhost:3000/api/getReport]
+Ciało zapytania ma postać:
+```JSON
+{
+  "from": "dateFrom",
+  "to": "dateTo"
+}
+```
+Serwer zwraca tablicę elementów postaci:
+```JSON
+{
+      "name": "itemName",
+      "price": "itemPrice",
+      "amount": "amountOfSoldItems"
+}
+```
+
 # Postępy prac
 | Zadanie                                             | Wykonano            | Kto                   |
 |:-------------:                                      |:-------------:      |:-----:                |
