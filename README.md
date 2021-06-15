@@ -319,6 +319,7 @@ w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
 ## Wyszukiwanie przedmiotów z danych kategorii i ich subkategorii
 Hierarchia głównych kategorii
 <img src="./imgs/hierarchia.png" alt="Hierarchia">
+
 Na stronie mamy możliwość przeglądania dostępnych przedmiotów. Mechanizm filtrowania oparty jest o hierarchie kategorii zamieszczoną wyżej.
 Gdy wybierzamy kategorię interesujących nas przedmiotów. Zwracanę nam są wszystkie przedmioty z poddrzewa kategorii wybranej kategorii.
 Żeby uzyskać pożądane przedmioty klient(aplikacja angularowa) wysyła zapytanie typu POST [localhost:3000/api/itemsOfCategory] do serwera.
