@@ -316,6 +316,39 @@ Funkcjonalność tę możemy osiągnąć wysyłając zapytanie typu POST na adre
 }
 ```
 w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
+## Wyszukiwanie przedmiotów z danych kategorii i ich subkategorii
+Hierarchia głównych kategorii:
+<img src="./imgs/hierarchia.png" alt="Hierarchia">
+
+Na stronie mamy możliwość przeglądania dostępnych przedmiotów. Mechanizm filtrowania oparty jest o hierarchie kategorii zamieszczoną wyżej.
+Gdy wybierzamy kategorię interesujących nas przedmiotów. Zwracanę nam są wszystkie przedmioty z poddrzewa kategorii wybranej kategorii.
+Żeby uzyskać pożądane przedmioty klient(aplikacja angularowa) wysyła zapytanie typu POST [localhost:3000/api/itemsOfCategory] do serwera.
+Ciało zapytania ma postać:
+```JSON
+{
+  "category":"categoryName"
+}
+```
+Serwer zwraca tablicę wszystkich przedmiotów które należą do wybranych kategorii.
+
+## Sporządzanie raportów sprzedanych przedmiotów
+Serwer daje możliwość sporządzenia raportu sprzedanych przedmiotów w danym okresie. Klient wysyła zapytanie POST [localhost:3000/api/getReport]
+Ciało zapytania ma postać:
+```JSON
+{
+  "from": "dateFrom",
+  "to": "dateTo"
+}
+```
+Serwer zwraca tablicę elementów postaci:
+```JSON
+{
+      "name": "itemName",
+      "price": "itemPrice",
+      "amount": "amountOfSoldItems"
+}
+```
+
 # Postępy prac
 | Zadanie                                             | Wykonano            | Kto                   |
 |:-------------:                                      |:-------------:      |:-----:                |
@@ -332,9 +365,9 @@ w odpowiedzi otrzymamy wszystkich dostawców dostarczających daną kategorię.
 | Dodać autoryzację (API)                             |✅                   | Michał                |
 | Dodać możliwość kupowania (API)                     |✅                   | Michał                |
 | Dodać tworzenie raportów od - do  (API)             |✅                   | Kamil                 |
-| Dodać obsługę dostaw - dodawanie itemów  (API)      |                     |                       |
+| Dodać obsługę dostaw - dodawanie itemów  (API)      |✅                   | Michał                |
 | Dodać pobieranie itemów z danej kategorii (API)     |✅                   | Kamil                 |
-| Dodać wyszukiwanie dostwców dla danego itemu (API)  |                     |                       |
+| Dodać wyszukiwanie dostwców dla danej kategorii (API)  |✅                | Michał                |
 | Dodać obsługę kategorii np. wyciągnięcie wszystkich itemów z danej kategori i wszystkich jej podkategorii (API)  |✅                    |Kamil                       |
 | Obsługa produktów w aplikacji internetowej         |✅                     | Paulina                     |
 | Obsługa audentykacji (rejestracja oraz logowanie) klientów w aplikacji internetowej         |✅                    | Paulina                      |  
