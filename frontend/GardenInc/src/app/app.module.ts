@@ -23,6 +23,9 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { DeliveryListComponent } from './components/delivery-list/delivery-list.component';
 import { DeliveryItemComponent } from './components/delivery-item/delivery-item.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { RaportsListComponent } from './components/raports-list/raports-list.component';
+import { RaportCardComponent } from './components/raport-card/raport-card.component';
+import { TotalRaportCardComponent } from './components/total-raport-card/total-raport-card.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { AddSupplierComponent } from './components/add-supplier/add-supplier.com
     CartItemComponent,
     DeliveryListComponent,
     DeliveryItemComponent,
-    AddSupplierComponent
+    AddSupplierComponent,
+    RaportsListComponent,
+    RaportCardComponent,
+    TotalRaportCardComponent,
   ],
   imports: [
     BrowserModule,

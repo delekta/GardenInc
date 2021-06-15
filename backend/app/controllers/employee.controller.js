@@ -4,7 +4,7 @@ const Employee = db.employees;
 // Create and Save a newItem
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.firstname) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
       supervised_categories: req.body.categories,
       "auth.login": req.body.login,
       "auth.password": req.body.password,
-      position : 3
+      position : req.body.position
     });
   
     // Save Item in the database

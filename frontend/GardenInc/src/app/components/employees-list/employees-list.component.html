@@ -1,2 +1,4 @@
-<p style="clear: both;">Lista pracowników</p><br>
-<app-employee-card *ngFor = "let employee of employees; let i = index" [specificEmployee]="employee"></app-employee-card>
+<div id="container-main">
+    <h2 style="clear: both;">Lista pracowników</h2><br>
+    <app-employee-card *ngFor = "let employee of employees; let i = index" [specificEmployee]="employee"></app-employee-card>
+</div>

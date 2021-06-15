@@ -1,0 +1,38 @@
+
+<div id=container-main>
+    <div class="form-group">
+        <label for="date_from">Date From</label>
+        <input
+          type="text"
+          class="form-control"
+          id="date_from"
+          required
+          [(ngModel)]="period.from"
+          name="date_from"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="date_to">Date To</label>
+        <input
+        type="text"
+          class="form-control"
+          id="date_to"
+          required
+          [(ngModel)]="period.to"
+          name="date_to"
+        />
+
+      </div>
+    <button type="submit" (click) = "Filter()">Filtruj</button>
+
+    <br><h2><u>Raporty</u></h2>
+    <div id=container-list>
+        <app-total-raport-card *ngFor = "let raport of raports; let i = index" [specificItem]="raport"></app-total-raport-card>
+    </div><br><br>
+
+    <br><h2><u>Wszytskie operacje kupna (Szczegóły):</u></h2>
+    <div id=container-list>
+        <app-raport-card *ngFor = "let item of items; let i = index" [specificItem]="item"></app-raport-card>
+    </div>
+</div>

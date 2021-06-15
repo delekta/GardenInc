@@ -1,4 +1,6 @@
 <div class="delivery-card" *ngIf="specificDelivery">
     <p>Dostawca: {{specificDelivery._id}}</p>
-    <p>Data: {{specificDelivery.return_date}}</p>
+    <ul>
+        <li *ngFor = "let item of specificDelivery.delivered" ><b>ID produktu:</b> {{item.item_id}}      <b>Ilość: </b>{{item.amount}}</li>
+    </ul>
 </div>

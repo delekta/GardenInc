@@ -4,7 +4,7 @@
         <option *ngFor = "let category of categories">{{category.name}}</option>
     </select>
     <button type="submit" (click) = "Filter()">Filtruj</button>
-    <p>Kategoria: Wszyskie</p><br>
+    <p>Kategoria: {{printedCategory}}</p><br>
     <div id=container-list>
         <app-item-card *ngFor = "let item of items; let i = index" [specificItem]="item"></app-item-card>
     </div>

@@ -3,10 +3,10 @@
     <!-- <p>{{specificItem}}</p> -->
     <img src="{{specificItem.photo}}">
     <p><b>{{specificItem.name}}</b></p>
-    <p> {{specificItem.price}}/szt.</p>
-    <p>{{amountProduct}}</p>
-    <p (click) = "addAmount()" class="amount">+</p>
-    <p (click) = "decreaseAmount()" class="amount">-</p><br>
+    <p> {{specificItem.price}}/szt.</p><br>
+    <p>Ilość: {{amountProduct}}</p>
+    <button  (click) = "addAmount()" class="amount">+</button >
+    <button (click) = "decreaseAmount()" class="amount">-</button ><br><br><br>
     <button type="button" (click)="add_to_cart()">Do koszyka</button>
     <button type="button">Edytuj</button>
 </div>

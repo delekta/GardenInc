@@ -13,7 +13,8 @@ export class ItemsListComponent implements OnInit {
   categories: any;
   currentItem = null;
   currentIndex = -1;
-  selectedCategory='';
+  selectedCategory=" ";
+  printedCategory = "Wszystko"
   name = '';
 
   constructor(private itemService: ItemService, private categoryService : CategoriesService) { }
@@ -94,6 +95,7 @@ Filter()
       data => {
         console.log(data);
         this.items = data;
+        this.printedCategory = this.selectedCategory;
       },
       error => {
         console.log("Error");

@@ -74,7 +74,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Item.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    Category.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
       .then(data => {
         if (!data) {
           res.status(404).send({

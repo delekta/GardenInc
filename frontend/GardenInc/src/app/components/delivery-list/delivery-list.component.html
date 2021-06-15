@@ -1,6 +1,7 @@
 <div id=container-main>
-    <h2 id="caption">Deliveries</h2><br>
     <app-add-delivery></app-add-delivery>
+    
+    <h2 id="caption">Szczegóły dostawy: </h2><br>
     <div id=container-list>
         <app-delivery-item *ngFor = "let delivery of deliveries; let i = index" [specificDelivery]="delivery"></app-delivery-item>
     </div>

@@ -1,0 +1,6 @@
+<div class="item-card" *ngIf="specificItem">
+    <p><b>Data operacji: {{specificItem.order_date}}</b></p>
+    <ul>
+        <li *ngFor = "let item of specificItem.ordered" ><b>ID produktu:</b> {{item.item_id}}      <b>Ilość: </b>{{item.amount}}</li>
+    </ul>
+</div>
